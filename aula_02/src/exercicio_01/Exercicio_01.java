@@ -8,7 +8,7 @@ package exercicio_01;
  *
  * @author uniegupires
  */
-public class Main {
+public class Exercicio_01 {
     public static void main(String[] args) {
         Account account = new Account();
         account.name = "John Doe";

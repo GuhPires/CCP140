@@ -5,6 +5,8 @@
 package index;
 
 import java.util.Scanner;
+import exercicio_01.Exercicio_01;
+import exercicio_02.Exercicio_02;
 
 /**
  *
@@ -18,21 +20,17 @@ public class Index {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         
-        System.out.println("Escolha o exercicio a ser executado (1 a 4):");
+        System.out.println("Escolha o exercicio a ser executado (1 a 2):");
         int exe = input.nextInt();
         
         switch(exe) {
             case 1:
                 printExe(exe);
+                Exercicio_01.main(null);
                 break;
             case 2:
                 printExe(exe);
-                break;
-            case 3:
-                printExe(exe);
-                break;
-            case 4:
-                printExe(exe);
+                Exercicio_02.main(null);
                 break;
             default:
                 System.out.println("Escolha invalida. Por favor escolha um numero entre 1 e 4");
