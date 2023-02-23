@@ -38,10 +38,6 @@ public class PrivateAccount {
         this.name = name;
     }
     
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-    
     public void setLimit(double limit) {
         this.limit = limit;
     }
