@@ -23,3 +23,6 @@
 /aula_09/build/
 /aula_09/dist/
 /projeto/UMS/nbproject/private/
+
+# secrets
+.env
