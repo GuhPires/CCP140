@@ -4,11 +4,10 @@
  */
 package model;
 
-import java.sql.ResultSet;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import controller.Person;
 import controller.Student;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +15,35 @@ import java.util.List;
  *
  * @author uniegupires
  */
-public class UserModel extends DBModel<Person> {
+public class StudentModel extends DBModel<Student> {
     
-    public UserModel() {
-        super("users");
+    public StudentModel() {
+        super("students");
     }
     
     @Override
-    public List<Person> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Student> getAll() {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Student> students = new ArrayList();
+            
+            while(results.next()) {
+                String fname = results.getString("first_name");
+                String lname = results.getString("last_name");
+                String ra = results.getString("ra");
+                
+                students.add(new Student(fname, lname, ra));
+            }
+            
+            return students;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -36,9 +55,9 @@ public class UserModel extends DBModel<Person> {
     public Student insertOne() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public List<Person> insertMany() {
+    public List<Student> insertMany() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -46,9 +65,9 @@ public class UserModel extends DBModel<Person> {
     public Student updateOne() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
-    public List<Person> updateMany() {
+    public List<Student> updateMany() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -58,7 +77,7 @@ public class UserModel extends DBModel<Person> {
     }
 
     @Override
-    public List<Person> deleteMany() {
+    public List<Student> deleteMany() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

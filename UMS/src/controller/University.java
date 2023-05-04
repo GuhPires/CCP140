@@ -13,9 +13,7 @@ import java.util.ArrayList;
 public class University {
     private ArrayList<String> subjects = new ArrayList<>();
     
-    public Student registerStudent() {
-        return new Student("John", "Doe");
-    }
+    public void registerStudent() {}
     
     public void unregisterStudent() {}
     

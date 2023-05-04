@@ -4,7 +4,9 @@
  */
 package ums;
 
-import model.UserModel;
+import controller.Student;
+import java.util.List;
+import model.StudentModel;
 
 /**
  *
@@ -16,9 +18,14 @@ public class UMS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        UserModel user = new UserModel();
+        StudentModel student = new StudentModel();
         
-        user.getAll();
+        List<Student> students = student.getAll();
+        System.out.println(students);
+        
+        for (Student s : students) {
+            System.out.println("Student:" + s.toString());
+        }
     }
     
 }

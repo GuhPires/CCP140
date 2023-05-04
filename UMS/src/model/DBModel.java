@@ -5,13 +5,13 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.util.List;
 
 /**
  *
  * @author uniegupires
  */
-public abstract class DBModel {
+public abstract class DBModel<T> {
     protected final String table;
     protected final Connection conn;
     
@@ -21,12 +21,12 @@ public abstract class DBModel {
         this.table = table;
     }
     
-    public abstract ResultSet getAll();
-    public abstract ResultSet getOne();
-    public abstract ResultSet insertOne();
-    public abstract ResultSet insertMany();
-    public abstract ResultSet updateOne();
-    public abstract ResultSet updateMany();
-    public abstract ResultSet deleteOne();
-    public abstract ResultSet deleteMany();
+    public abstract List<T> getAll();
+    public abstract T getOne();
+    public abstract T insertOne();
+    public abstract List<T> insertMany();
+    public abstract T updateOne();
+    public abstract List<T> updateMany();
+    public abstract T deleteOne();
+    public abstract List<T> deleteMany();
 }

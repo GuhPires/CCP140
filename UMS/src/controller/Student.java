@@ -5,7 +5,6 @@
 package controller;
 
 import java.util.ArrayList;
-import model.Utils;
 
 /**
  *
@@ -15,15 +14,20 @@ public class Student extends Person {
     private ArrayList<String> subjects = new ArrayList<>();
     private String RA;
     
-   public Student(String firstName, String lastName) {
+   public Student(String firstName, String lastName, String RA) {
        super(firstName, lastName);
-       final int MAX = 999;
-       final int MIN = 100;
-       final int control = Utils.random(MAX, MIN);
-       final int digit = Utils.random(0, 9);
-       
-       this.RA = "11.123." + control + "-" + digit;
+       this.RA = RA;
    }
+    
+//   public Student(String firstName, String lastName) {
+//       super(firstName, lastName);
+//       final int MAX = 999;
+//       final int MIN = 100;
+//       final int control = Utils.random(MAX, MIN);
+//       final int digit = Utils.random(0, 9);
+//       
+//       this.RA = "11.123." + control + "-" + digit;
+//   }
     
     public void addSubjects(String subject) {
     }
