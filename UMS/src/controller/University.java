@@ -10,20 +10,29 @@ import java.util.ArrayList;
  *
  * @author uniegupires
  */
-public class University {
-    private ArrayList<String> subjects = new ArrayList<>();
-    
+public class University {    
     public void registerStudent() {}
     
     public void unregisterStudent() {}
     
-    public void addSubjectToStudent(String subject, String studentId) {}
+    public void showAllSubjects() {}
     
-    // get one
-    public void showStudent(String student) {}
+    public void showSubjects(String studentRa) {}
+    
+    public void addSubjectToStudent(String subject, int studentId) {}
+    
+    public void showGrades(String studentRa) {}
+    
+    public void showGradesHistory(String studentRa) {}
     
     // get all
-    public void showStudent() {}
+    public void showStudents(String ...subject) {
+        if (!subject[0].isEmpty()) {} // search with subject
+        // search all without subjects
+    }
     
-    public void showSubjects() {}   
+    // get one  
+    public void showStudent(String studentRa) {}
+    
+    public void closeSemester() {}
 }

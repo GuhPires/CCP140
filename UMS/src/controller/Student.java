@@ -28,7 +28,8 @@ public class Student extends Person {
 //       
 //       this.RA = "11.123." + control + "-" + digit;
 //   }
+   
+    public void showGrades() {}
     
-    public void addSubjects(String subject) {
-    }
+    public void showGradesHistory() {}
 }

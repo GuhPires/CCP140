@@ -52,7 +52,7 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student insertOne() {
+    public Student insertOne(Student obj) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

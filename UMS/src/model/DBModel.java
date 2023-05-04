@@ -23,7 +23,7 @@ public abstract class DBModel<T> {
     
     public abstract List<T> getAll();
     public abstract T getOne();
-    public abstract T insertOne();
+    public abstract T insertOne(T obj);
     public abstract List<T> insertMany();
     public abstract T updateOne();
     public abstract List<T> updateMany();
