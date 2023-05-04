@@ -25,15 +25,17 @@ public class UserModel extends DBModel {
             PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table);
             
             ResultSet results = query.executeQuery();
-            while(results.next()) {
-                String name = results.getString("name");
-                String password = results.getString("password");
-                
-                // check user type and create obj
-            } 
+            
+            return results;
+//            while(results.next()) {
+//                String name = results.getString("name");
+//                String password = results.getString("password");
+//                
+//                // check user type and create obj
+//            } 
         } catch (SQLException e) {
             System.err.println("Query error: " + e.getMessage());
-//            return null;
+            return null;
         }
     }
 
