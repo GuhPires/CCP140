@@ -9,7 +9,7 @@ package model;
  * @author uniegupires
  */
 public class Utils {
-    static int random(int max, int min){
+    public static int random(int max, int min){
         return (int)Math.floor(Math.random() *(max - min + 1) + min);
     }
 }
