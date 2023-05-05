@@ -11,7 +11,9 @@ import java.util.ArrayList;
  * @author uniegupires
  */
 public class University {    
-    public void registerStudent() {}
+    public void registerStudent() {
+        // something
+    }
     
     public void unregisterStudent() {}
     
