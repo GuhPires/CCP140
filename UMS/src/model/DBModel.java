@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author uniegupires
+ * @param <T>
  */
 public abstract class DBModel<T> {
     protected final String table;
@@ -22,11 +23,11 @@ public abstract class DBModel<T> {
     }
     
     public abstract List<T> getAll();
-    public abstract T getOne();
+    public abstract T getOne(String field);
     public abstract T insertOne(T obj);
-    public abstract List<T> insertMany();
-    public abstract T updateOne();
+    public abstract List<T> insertMany(List<T> objs);
+    public abstract T updateOne(String field);
     public abstract List<T> updateMany();
-    public abstract T deleteOne();
+    public abstract T deleteOne(String field);
     public abstract List<T> deleteMany();
 }

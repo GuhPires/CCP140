@@ -18,18 +18,12 @@ public class Student extends Person {
        super(firstName, lastName);
        this.RA = RA;
    }
-    
-//   public Student(String firstName, String lastName) {
-//       super(firstName, lastName);
-//       final int MAX = 999;
-//       final int MIN = 100;
-//       final int control = Utils.random(MAX, MIN);
-//       final int digit = Utils.random(0, 9);
-//       
-//       this.RA = "11.123." + control + "-" + digit;
-//   }
    
     public void showGrades() {}
     
     public void showGradesHistory() {}
+    
+    public void changePassword() {
+        // username = RA -> call updatePass method with usedId or userName
+    }
 }

@@ -23,9 +23,9 @@
 /aula_09/build/
 /aula_09/dist/
 /projeto/UMS/nbproject/private/
-
-# secrets
-.env
 /UMS/build/
 /UMS/nbproject/private/
 /UMS/dist/
+
+# secrets
+.env

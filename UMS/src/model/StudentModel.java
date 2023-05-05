@@ -47,22 +47,28 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student getOne() {
+    public Student getOne(String field) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Student insertOne(Student obj) {
+//        final int MAX = 999;
+//        final int MIN = 100;
+//        final int control = Utils.random(MAX, MIN);
+//        final int digit = Utils.random(0, 9);
+//        this.RA = "11.123." + control + "-" + digit;
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public List<Student> insertMany() {
+    public List<Student> insertMany(List<Student> objs) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Student updateOne() {
+    public Student updateOne(String field) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -72,7 +78,7 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student deleteOne() {
+    public Student deleteOne(String field) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -80,5 +86,4 @@ public class StudentModel extends DBModel<Student> {
     public List<Student> deleteMany() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
 }
