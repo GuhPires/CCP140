@@ -47,8 +47,25 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student getOne(String field) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Student getOne(String RA) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE ra = ?");
+            query.setString(1, RA);
+            
+            ResultSet results = query.executeQuery();
+            
+            if (!results.next()) return null;
+            
+            String fname = results.getString("first_name");
+            String lname = results.getString("last_name");
+            String ra = results.getString("ra");
+            
+            return new Student(fname, lname, ra);
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

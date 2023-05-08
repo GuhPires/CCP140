@@ -5,6 +5,7 @@
 package controller;
 
 import java.util.ArrayList;
+import model.StudentModel;
 
 /**
  *
@@ -17,6 +18,14 @@ public class Student extends Person {
    public Student(String firstName, String lastName, String RA) {
        super(firstName, lastName);
        this.RA = RA;
+   }
+   
+   public static Student findStudent(String RA) {
+       StudentModel model = new StudentModel();
+       
+       Student student = model.getOne(RA);
+       
+       return student;
    }
    
     public void showGrades() {}
