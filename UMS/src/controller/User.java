@@ -30,6 +30,25 @@ public class User {
         
         return user;
     }
+    
+    public static boolean changePass(String username, String currPass, String newPass, String passConfirmation) {
+        UserModel model = new UserModel();
+        
+        User user = model.getOne(username);
+        
+        // TODO: show message to user
+        if (user == null || !user.getPassword().equals(currPass)) return false;
+        
+        if (newPass.equals(passConfirmation)) {
+            user = model.updateOne("username", username, "password", newPass);
+            
+            System.out.println("USER: " + user);
+            
+            return user != null;
+        }
+        
+        return false;
+    }
 
     public String getUsername() {
         return username;

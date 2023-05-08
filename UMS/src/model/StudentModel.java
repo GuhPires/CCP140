@@ -85,7 +85,7 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student updateOne(String field) {
+    public Student updateOne(String idField, String idValue, String field, String value) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

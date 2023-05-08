@@ -58,8 +58,20 @@ public class UserModel extends DBModel<User> {
     }
 
     @Override
-    public User updateOne(String field) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public User updateOne(String idField, String idValue, String field, String value) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET " + field + " = ? WHERE " + idField + " = ?");
+            query.setString(1, value);
+            query.setString(2, idValue);
+            
+            ResultSet results = query.executeQuery();
+            
+            return this.getOne(idField);
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

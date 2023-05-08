@@ -26,7 +26,7 @@ public abstract class DBModel<T> {
     public abstract T getOne(String field);
     public abstract T insertOne(T obj);
     public abstract List<T> insertMany(List<T> objs);
-    public abstract T updateOne(String field);
+    public abstract T updateOne(String idField, String idValue, String field, String value);
     public abstract List<T> updateMany();
     public abstract T deleteOne(String field);
     public abstract List<T> deleteMany();

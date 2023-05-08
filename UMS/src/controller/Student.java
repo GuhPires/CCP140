@@ -35,4 +35,8 @@ public class Student extends Person {
     public void changePassword() {
         // username = RA -> call updatePass method with usedId or userName
     }
+
+    public String getRA() {
+        return RA;
+    }
 }
