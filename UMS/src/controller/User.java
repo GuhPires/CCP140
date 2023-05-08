@@ -11,9 +11,9 @@ import model.UserModel;
  * @author uniegupires
  */
 public class User {
-    String username;
-    String password;
-    String type;
+    private String username;
+    private String password;
+    private String type;
    
     public User(String username, String password, String type) {
         this.username = username;
@@ -26,8 +26,20 @@ public class User {
         
         User user = model.getOne(username);
         
-        if (!user.password.equals(password)) return null;
+        if (user == null || !user.getPassword().equals(password)) return null;
         
         return user;
-    } 
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

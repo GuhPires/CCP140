@@ -28,7 +28,8 @@ public class UserModel extends DBModel<User> {
     @Override
     public User getOne(String username) {
        try {
-            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table);
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE username = ?");
+            query.setString(1, username);
             
             ResultSet results = query.executeQuery();
             
