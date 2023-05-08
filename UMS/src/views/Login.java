@@ -5,7 +5,6 @@
 package views;
 
 import controller.User;
-import java.util.Arrays;
 
 /**
  *
@@ -41,7 +40,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        signup_button.setText("SIGN UP");
+        signup_button.setText("LOGIN");
         signup_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signup_buttonActionPerformed(evt);
@@ -136,16 +135,16 @@ public class Login extends javax.swing.JFrame {
         
         User user = User.login(usr, pass);
         
-        System.out.println("USER: " + user);
-        
         // TODO: show error to user
         if (user == null) return;
         
-        if (user.getType().equals("student")) System.out.println("Student!");
-        if (user.getType().equals("university")) System.out.println("University!");
-        
         username.setText("");
         password.setText("");
+        
+        if (user.getType().equals("student")) new StudentView().setVisible(true);
+        if (user.getType().equals("university")) new UniversityView().setVisible(true);
+        
+        this.setVisible(false);
     }//GEN-LAST:event_signup_buttonActionPerformed
 
     /**

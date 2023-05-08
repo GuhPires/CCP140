@@ -90,7 +90,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="signup_button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="SIGN UP"/>
+            <Property name="text" type="java.lang.String" value="LOGIN"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signup_buttonActionPerformed"/>
