@@ -69,14 +69,20 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student insertOne(Student obj) {
-//        final int MAX = 999;
-//        final int MIN = 100;
-//        final int control = Utils.random(MAX, MIN);
-//        final int digit = Utils.random(0, 9);
-//        this.RA = "11.123." + control + "-" + digit;
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Student insertOne(Student student) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + this.table + " (ra, first_name, last_name) VALUES (?, ?, ?)");
+            query.setString(1, student.getRA());
+            query.setString(2, student.firstName);
+            query.setString(3, student.lastName);
+            
+            query.execute();
+            
+            return this.getOne(student.getRA());
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override
@@ -85,7 +91,7 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student updateOne(String idField, String idValue, String field, String value) {
+    public boolean updateOne(String idField, String idValue, String field, String value) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

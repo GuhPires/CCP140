@@ -14,7 +14,7 @@ import model.StudentModel;
 public class Student extends Person {
     private ArrayList<String> subjects = new ArrayList<>();
     private String RA;
-    
+   
    public Student(String firstName, String lastName, String RA) {
        super(firstName, lastName);
        this.RA = RA;

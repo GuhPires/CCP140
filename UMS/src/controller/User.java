@@ -40,11 +40,9 @@ public class User {
         if (user == null || !user.getPassword().equals(currPass)) return false;
         
         if (newPass.equals(passConfirmation)) {
-            user = model.updateOne("username", username, "password", newPass);
+            boolean updated = model.updateOne("username", username, "password", newPass);
             
-            System.out.println("USER: " + user);
-            
-            return user != null;
+            return updated;
         }
         
         return false;

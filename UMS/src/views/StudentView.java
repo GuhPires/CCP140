@@ -41,7 +41,7 @@ public class StudentView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        change_pass = new javax.swing.JButton();
         pass_confirmation = new javax.swing.JPasswordField();
         new_pass = new javax.swing.JPasswordField();
         current_pass = new javax.swing.JPasswordField();
@@ -65,10 +65,10 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel4.setText("CONFIRM PASSWORD");
 
-        jButton1.setText("CHANGE PASSWORD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        change_pass.setText("CHANGE PASSWORD");
+        change_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                change_passActionPerformed(evt);
             }
         });
 
@@ -153,7 +153,7 @@ public class StudentView extends javax.swing.JFrame {
                                 .addComponent(pass_confirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(300, 300, 300)
-                                .addComponent(jButton1))
+                                .addComponent(change_pass))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +196,7 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(pass_confirmation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(change_pass)
                 .addContainerGap())
         );
 
@@ -232,7 +232,7 @@ public class StudentView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_current_passActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void change_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_passActionPerformed
         String currPass = String.valueOf(current_pass.getPassword());
         String newPass = String.valueOf(new_pass.getPassword());
         String passConfirmation = String.valueOf(pass_confirmation.getPassword());
@@ -243,15 +243,17 @@ public class StudentView extends javax.swing.JFrame {
         // TODO: show message to user
         if (!User.changePass(this.student.getRA(), currPass, newPass, passConfirmation)) return;
         
+        //TODO: show message to user
+        
         current_pass.setText("");
         new_pass.setText("");
         pass_confirmation.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_change_passActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton change_pass;
     private javax.swing.JPasswordField current_pass;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -4,18 +4,47 @@
  */
 package controller;
 
-import java.util.ArrayList;
+import model.StudentModel;
+import model.UserModel;
+import model.Utils;
 
 /**
  *
  * @author uniegupires
  */
-public class University {    
-    public void registerStudent() {
-        // something
+public class University {
+    String name;
+    
+    public University(String name) {
+        this.name = name;
     }
     
-    public void unregisterStudent() {}
+    public Student registerStudent(String fname, String lname, String ra, String password) {
+        UserModel userModel = new UserModel();
+        StudentModel studentModel = new StudentModel();
+        
+        String RA = Utils.genRA();
+        
+        User user = userModel.insertOne(new User(RA, password, "student"));
+        
+        // TODO: show message to user
+        if (user == null) return null;
+        System.out.println("USER CREATED");
+        
+        Student student = studentModel.insertOne(new Student(fname, lname, RA));
+        
+        // TODO: show message to user
+        // TODO: delete created user
+        if (student == null) return null;
+        
+        System.out.println("STUDENT CREATED!");
+        
+        return student;
+    }
+    
+    public void unregisterStudent(String ra) {
+        
+    }
     
     public void showAllSubjects() {}
     
