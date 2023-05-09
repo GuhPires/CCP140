@@ -5,6 +5,7 @@
 package controller;
 
 import model.StudentModel;
+import model.SubjectModel;
 import model.UserModel;
 import model.Utils;
 
@@ -53,6 +54,14 @@ public class University {
         return deletedStudent;
     }
     
+    public boolean createSubject(String name) {
+        SubjectModel model = new SubjectModel();
+        
+        Subject subject = model.insertOne(new Subject(this.name, name));
+        
+        return subject != null;
+    }
+    
     public void showAllSubjects() {}
     
     public void showSubjects(String studentRa) {}
@@ -65,12 +74,14 @@ public class University {
     
     // get all
     public void showStudents(String ...subject) {
-        if (!subject[0].isEmpty()) {} // search with subject
+        if (!subject[0].isBlank()) {} // search with subject
         // search all without subjects
     }
     
     // get one  
-    public void showStudent(String studentRa) {}
+    public void showStudent(String studentRa) {
+        // TODO: output curr and prev grades and subjects
+    }
     
     public void closeSemester() {}
 }

@@ -5,6 +5,7 @@
 package ums;
 
 import controller.Student;
+import controller.Subject;
 import controller.University;
 import java.util.List;
 import model.StudentModel;
@@ -19,15 +20,11 @@ public class UMS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        University uni = new University("FEI");
+        University uni = new University("fei");
         
-        UMS.printStudents();
+        boolean sub = uni.createSubject("CCP140");
         
-        boolean deleted = uni.unregisterStudent("11.123.204-8");
-        
-        System.out.println("DELETED? " + deleted);
-        
-        UMS.printStudents();
+        System.out.println("CREATED SUB? " + sub);
     }
     
     public static void printStudents() {
