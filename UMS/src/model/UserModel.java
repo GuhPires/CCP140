@@ -92,8 +92,18 @@ public class UserModel extends DBModel<User> {
     }
 
     @Override
-    public User deleteOne(String field) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteOne(String username) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("DELETE FROM " + this.table + " WHERE username = ?");
+            query.setString(1, username);
+            
+            query.execute();
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

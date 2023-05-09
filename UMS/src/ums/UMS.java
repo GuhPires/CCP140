@@ -23,12 +23,9 @@ public class UMS {
         
         UMS.printStudents();
         
-        Student student = uni.registerStudent("Jenny", "Doe", "2222", "1234");
+        boolean deleted = uni.unregisterStudent("11.123.204-8");
         
-        if (student == null) {
-            System.out.println("ERROR!");
-            return;
-        }
+        System.out.println("DELETED? " + deleted);
         
         UMS.printStudents();
     }

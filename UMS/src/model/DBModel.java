@@ -28,6 +28,6 @@ public abstract class DBModel<T> {
     public abstract List<T> insertMany(List<T> objs);
     public abstract boolean updateOne(String idField, String idValue, String field, String value);
     public abstract List<T> updateMany();
-    public abstract T deleteOne(String field);
+    public abstract boolean deleteOne(String field);
     public abstract List<T> deleteMany();
 }

@@ -101,8 +101,18 @@ public class StudentModel extends DBModel<Student> {
     }
 
     @Override
-    public Student deleteOne(String field) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean deleteOne(String ra) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("DELETE FROM " + this.table + " WHERE ra = ?");
+            query.setString(1, ra);
+            
+            query.execute();
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

@@ -19,7 +19,7 @@ public class University {
         this.name = name;
     }
     
-    public Student registerStudent(String fname, String lname, String ra, String password) {
+    public Student registerStudent(String fname, String lname, String password) {
         UserModel userModel = new UserModel();
         StudentModel studentModel = new StudentModel();
         
@@ -27,13 +27,11 @@ public class University {
         
         User user = userModel.insertOne(new User(RA, password, "student"));
         
-        // TODO: show message to user
         if (user == null) return null;
         System.out.println("USER CREATED");
         
         Student student = studentModel.insertOne(new Student(fname, lname, RA));
         
-        // TODO: show message to user
         // TODO: delete created user
         if (student == null) return null;
         
@@ -42,8 +40,17 @@ public class University {
         return student;
     }
     
-    public void unregisterStudent(String ra) {
+    public boolean unregisterStudent(String ra) {
+        UserModel userModel = new UserModel();
+        StudentModel studentModel = new StudentModel();
         
+        boolean deletedUser = userModel.deleteOne(ra);
+        
+        if (!deletedUser) return false;
+        
+        boolean deletedStudent = studentModel.deleteOne(ra);
+        
+        return deletedStudent;
     }
     
     public void showAllSubjects() {}
