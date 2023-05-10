@@ -23,6 +23,8 @@ public class UMS {
     public static void main(String[] args) {
         University uni = new University("fei");
         
+        uni.registerStudent("Jenny", "Doe", "1234", 4);
+        
         UMS.printStudents();
         
         UMS.printUniversityStudents(uni.getName());

@@ -21,7 +21,7 @@ public class University {
         this.name = name;
     }
     
-    public Student registerStudent(String fname, String lname, String password) {
+    public Student registerStudent(String fname, String lname, String password, int semester) {
         UserModel userModel = new UserModel();
         StudentModel studentModel = new StudentModel();
         
@@ -32,7 +32,7 @@ public class University {
         if (user == null) return null;
         System.out.println("USER CREATED");
         
-        Student student = studentModel.insertOne(new Student(fname, lname, RA));
+        Student student = studentModel.insertOne(new Student(fname, lname, RA, this.name, semester));
         
         // TODO: delete created user
         if (student == null) return null;

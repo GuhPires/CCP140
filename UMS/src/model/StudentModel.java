@@ -34,8 +34,10 @@ public class StudentModel extends DBModel<Student> {
                 String fname = results.getString("first_name");
                 String lname = results.getString("last_name");
                 String ra = results.getString("ra");
+                String uni = results.getString("university");
+                int semester = results.getInt("semester");
                 
-                students.add(new Student(fname, lname, ra));
+                students.add(new Student(fname, lname, ra, uni, semester));
             }
             
             return students;
@@ -59,8 +61,10 @@ public class StudentModel extends DBModel<Student> {
                 String fname = results.getString("first_name");
                 String lname = results.getString("last_name");
                 String ra = results.getString("ra");
+                String uni = results.getString("university");
+                int semester = results.getInt("semester");
                 
-                students.add(new Student(fname, lname, ra));
+                students.add(new Student(fname, lname, ra, uni, semester));
             }
             
             return students;
@@ -84,22 +88,26 @@ public class StudentModel extends DBModel<Student> {
             String fname = results.getString("first_name");
             String lname = results.getString("last_name");
             String ra = results.getString("ra");
+            String uni = results.getString("university");
+            int semester = results.getInt("semester");
             
-            return new Student(fname, lname, ra);
+            return new Student(fname, lname, ra, uni, semester);
             
         } catch (SQLException e) {
             System.err.println("Query error: " + e.getMessage());
             return null;
         }
     }
-
+    
     @Override
     public Student insertOne(Student student) {
         try {
-            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + this.table + " (ra, first_name, last_name) VALUES (?, ?, ?)");
+            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + this.table + " (ra, first_name, last_name, university, semester) VALUES (?, ?, ?, ?, ?)");
             query.setString(1, student.getRA());
             query.setString(2, student.firstName);
             query.setString(3, student.lastName);
+            query.setString(4, student.getUniversity());
+            query.setInt(5, student.getSemester());
             
             query.execute();
             
