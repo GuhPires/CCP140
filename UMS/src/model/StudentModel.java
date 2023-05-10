@@ -45,6 +45,31 @@ public class StudentModel extends DBModel<Student> {
             return null;
         }
     }
+    
+    public List<Student> getAll(String university) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE university = ?");
+            query.setString(1, university);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Student> students = new ArrayList();
+            
+            while(results.next()) {
+                String fname = results.getString("first_name");
+                String lname = results.getString("last_name");
+                String ra = results.getString("ra");
+                
+                students.add(new Student(fname, lname, ra));
+            }
+            
+            return students;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public Student getOne(String RA) {

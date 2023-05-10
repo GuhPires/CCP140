@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +24,27 @@ public class SubjectModel extends DBModel<Subject> {
 
     @Override
     public List<Subject> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Subject> subjects = new ArrayList();
+            
+            while(results.next()) {
+                String name = results.getString("name");
+                String university = results.getString("university");
+                String student = results.getString("student");
+                
+                subjects.add(new Subject(name, university, student));
+            }
+            
+            return subjects;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
     }
 
     @Override

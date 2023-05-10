@@ -9,6 +9,7 @@ import controller.Subject;
 import controller.University;
 import java.util.List;
 import model.StudentModel;
+import model.SubjectModel;
 
 /**
  *
@@ -22,19 +23,38 @@ public class UMS {
     public static void main(String[] args) {
         University uni = new University("fei");
         
-        boolean sub = uni.createSubject("CCP140");
+        UMS.printStudents();
         
-        System.out.println("CREATED SUB? " + sub);
+        UMS.printUniversityStudents(uni.getName());
     }
     
     public static void printStudents() {
         StudentModel student = new StudentModel();
         
         List<Student> students = student.getAll();
-        System.out.println(students);
         
         for (Student s : students) {
             System.out.println("Student:" + s.toString());
+        }
+    }
+    
+    public static void printUniversityStudents(String university) {
+        StudentModel student = new StudentModel();
+        
+        List<Student> students = student.getAll(university);
+        
+        for (Student s : students) {
+            System.out.println("Student from " + university + ":" + s.toString());
+        }
+    }
+    
+    public static void printSubjects() {
+        SubjectModel model = new SubjectModel();
+        
+        List<Subject> subjects = model.getAll();
+        
+        for (Subject s : subjects) {
+            System.out.println("Subject: " + s.toString());
         }
     }
     

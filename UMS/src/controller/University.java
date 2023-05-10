@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.util.List;
 import model.StudentModel;
 import model.SubjectModel;
 import model.UserModel;
@@ -14,7 +15,7 @@ import model.Utils;
  * @author uniegupires
  */
 public class University {
-    String name;
+    private String name;
     
     public University(String name) {
         this.name = name;
@@ -62,7 +63,11 @@ public class University {
         return subject != null;
     }
     
-    public void showAllSubjects() {}
+    public List<Subject> showAllSubjects() {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAll(); 
+    }
     
     public void showSubjects(String studentRa) {}
     
@@ -72,10 +77,13 @@ public class University {
     
     public void showGradesHistory(String studentRa) {}
     
-    // get all
-    public void showStudents(String ...subject) {
-        if (!subject[0].isBlank()) {} // search with subject
-        // search all without subjects
+    public List<Student> showStudents(String ...subject) {
+        StudentModel model = new StudentModel();
+        
+        if (!subject[0].isBlank()) {} 
+        
+        return model.getAll(this.name);
+        
     }
     
     // get one  
@@ -84,4 +92,8 @@ public class University {
     }
     
     public void closeSemester() {}
+
+    public String getName() {
+        return name;
+    }
 }
