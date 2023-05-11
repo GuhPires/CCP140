@@ -192,6 +192,30 @@ public class SubjectModel extends DBModel<Subject> {
             return false;
         }
     }
+    
+    public boolean setGrades(Student student, List<Subject> subjects) {
+//        String statement = "";
+//        
+//        for (Subject s: subjects) {
+//            statement += "UPDATE " + this.table + " SET student = ?, semester = ? WHERE student = ?; ";
+//        }
+//        
+//        try {
+//            PreparedStatement query = this.conn.prepareStatement(statement);
+//            query.setString(1, student.getRA());
+//            query.setInt(2, student.getSemester());
+//            query.setInt(3, subject.getId());
+//            
+//            query.execute();
+//            
+//            return true;
+//        } catch (SQLException e) {
+//            System.err.println("Query error: " + e.getMessage());
+//            return false;
+//        }
+
+        return true;
+    }
 
     @Override
     public List<Subject> updateMany() {

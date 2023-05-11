@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.StudentModel;
 import model.SubjectModel;
@@ -85,7 +86,11 @@ public class University {
         return model.getAllByStudent(student, current);
     }
     
-    public void setStudentGrades(List<Subject> subjects) {}
+    public boolean setStudentGrades(Student student, List<Subject> subjects) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.setGrades(student, subjects);
+    }
     
     public List<Subject> getAllSubjects() {
         SubjectModel model = new SubjectModel();
