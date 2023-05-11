@@ -63,23 +63,11 @@ public class University {
         return subject != null;
     }
     
-    public List<Subject> getAllSubjects() {
-        SubjectModel model = new SubjectModel();
-        
-        return model.getAll(); 
-    }
-    
-    public void getStudentSubjects(String studentRa) {}
-    
     public boolean addSubjectToStudent(Subject subject, Student student) {
         SubjectModel model = new SubjectModel();
         
         return model.setStudent(subject, student);
     }
-    
-    public void getStudentGrades(String studentRa) {}
-    
-    public void getStudentHistory(String studentRa) {}
     
     public List<Student> getStudents(String ...subject) {
         StudentModel model = new StudentModel();
@@ -91,9 +79,18 @@ public class University {
         return model.getAllByUniversity(this.name);
     }
     
-    // get one  
-    public void showStudent(String studentRa) {
-        // TODO: output curr and prev grades and subjects
+    public List<Subject> getStudentSubjects(Student student, boolean current) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllByStudent(student, current);
+    }
+    
+    public void setStudentGrades(List<Subject> subjects) {}
+    
+    public List<Subject> getAllSubjects() {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllByUniversity(this.name); 
     }
     
     public void closeSemester() {}

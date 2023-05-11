@@ -20,19 +20,28 @@ public class UMS {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {  
+    public static void main(String[] args) {
+        StudentModel studentModel = new StudentModel();
+        
         University uni = new University("fei");
         
-        List<Student> uniStudents = uni.getStudents();
+        List<Subject> uniSubjects = uni.getAllSubjects();
         
-        for (Student s : uniStudents) {
-            System.out.println("Student:" + s.toString());
+        for (Subject s : uniSubjects) {
+            System.out.println("Sub from uni:" + s.toString());
         }
         
-        List<Student> subStudents = uni.getStudents("CCP140");
+        Student student = studentModel.getOne("11.123.882-2");
+        List<Subject> currSubjects = uni.getStudentSubjects(student, true);
         
-        for (Student s : subStudents) {
-            System.out.println("Student:" + s.toString());
+        for (Subject s : currSubjects) {
+            System.out.println("Current Sub:" + s.toString());
+        }
+        
+        List<Subject> subjects = uni.getStudentSubjects(student, false);
+        
+        for (Subject s : subjects) {
+            System.out.println("All Sub:" + s.toString());
         }
     }
     
