@@ -21,13 +21,16 @@ public class UMS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        StudentModel studentModel = new StudentModel();
+        SubjectModel subjectModel = new SubjectModel();
+        
         University uni = new University("fei");
+        Student student = studentModel.getOne("11.123.882-2");
+        Subject subject = subjectModel.getOne(11);
         
-        uni.registerStudent("Jenny", "Doe", "1234", 4);
+        boolean added = uni.addSubjectToStudent(subject, student);
         
-        UMS.printStudents();
-        
-        UMS.printUniversityStudents(uni.getName());
+        System.out.println("ADDED? " + added);
     }
     
     public static void printStudents() {

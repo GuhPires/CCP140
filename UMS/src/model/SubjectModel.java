@@ -4,6 +4,7 @@
  */
 package model;
 
+import controller.Student;
 import controller.Subject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,11 +33,14 @@ public class SubjectModel extends DBModel<Subject> {
             List<Subject> subjects = new ArrayList();
             
             while(results.next()) {
+                int id = results.getInt("id");
                 String name = results.getString("name");
                 String university = results.getString("university");
                 String student = results.getString("student");
+                int semester = results.getInt("semester");
+                float grade = results.getFloat("grade");
                 
-                subjects.add(new Subject(name, university, student));
+                subjects.add(new Subject(id, name, university, student, semester, grade));
             }
             
             return subjects;
@@ -64,8 +68,10 @@ public class SubjectModel extends DBModel<Subject> {
             String name = results.getString("name");
             String university = results.getString("university");
             String student = results.getString("student");
+            int semester = results.getInt("semester");
+            float grade = results.getFloat("grade");
             
-            return new Subject(name, university, student);
+            return new Subject(id, name, university, student, semester, grade);
             
         } catch (SQLException e) {
             System.err.println("Query error: " + e.getMessage());
@@ -105,6 +111,22 @@ public class SubjectModel extends DBModel<Subject> {
     @Override
     public boolean updateOne(String idField, String idValue, String field, String value) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public boolean setStudent(Subject subject, Student student) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET student = ?, semester = ? WHERE id = ?");
+            query.setString(1, student.getRA());
+            query.setInt(2, student.getSemester());
+            query.setInt(3, subject.getId());
+            
+            query.execute();
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return false;
+        }
     }
 
     @Override

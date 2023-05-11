@@ -71,7 +71,11 @@ public class University {
     
     public void showSubjects(String studentRa) {}
     
-    public void addSubjectToStudent(String subject, int studentId) {}
+    public boolean addSubjectToStudent(Subject subject, Student student) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.setStudent(subject, student);
+    }
     
     public void showGrades(String studentRa) {}
     
