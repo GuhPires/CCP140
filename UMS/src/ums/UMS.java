@@ -20,17 +20,20 @@ public class UMS {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        StudentModel studentModel = new StudentModel();
-        SubjectModel subjectModel = new SubjectModel();
-        
+    public static void main(String[] args) {  
         University uni = new University("fei");
-        Student student = studentModel.getOne("11.123.882-2");
-        Subject subject = subjectModel.getOne(11);
         
-        boolean added = uni.addSubjectToStudent(subject, student);
+        List<Student> uniStudents = uni.getStudents();
         
-        System.out.println("ADDED? " + added);
+        for (Student s : uniStudents) {
+            System.out.println("Student:" + s.toString());
+        }
+        
+        List<Student> subStudents = uni.getStudents("CCP140");
+        
+        for (Student s : subStudents) {
+            System.out.println("Student:" + s.toString());
+        }
     }
     
     public static void printStudents() {
@@ -46,7 +49,7 @@ public class UMS {
     public static void printUniversityStudents(String university) {
         StudentModel student = new StudentModel();
         
-        List<Student> students = student.getAll(university);
+        List<Student> students = student.getAllByUniversity(university);
         
         for (Student s : students) {
             System.out.println("Student from " + university + ":" + s.toString());

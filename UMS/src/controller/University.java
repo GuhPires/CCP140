@@ -63,13 +63,13 @@ public class University {
         return subject != null;
     }
     
-    public List<Subject> showAllSubjects() {
+    public List<Subject> getAllSubjects() {
         SubjectModel model = new SubjectModel();
         
         return model.getAll(); 
     }
     
-    public void showSubjects(String studentRa) {}
+    public void getStudentSubjects(String studentRa) {}
     
     public boolean addSubjectToStudent(Subject subject, Student student) {
         SubjectModel model = new SubjectModel();
@@ -77,17 +77,18 @@ public class University {
         return model.setStudent(subject, student);
     }
     
-    public void showGrades(String studentRa) {}
+    public void getStudentGrades(String studentRa) {}
     
-    public void showGradesHistory(String studentRa) {}
+    public void getStudentHistory(String studentRa) {}
     
-    public List<Student> showStudents(String ...subject) {
+    public List<Student> getStudents(String ...subject) {
         StudentModel model = new StudentModel();
         
-        if (!subject[0].isBlank()) {} 
+        String sub = subject.length > 0 && !subject[0].isBlank() ? subject[0] : null;
         
-        return model.getAll(this.name);
+        if (sub != null) return model.getAllBySubject(sub);
         
+        return model.getAllByUniversity(this.name);
     }
     
     // get one  
