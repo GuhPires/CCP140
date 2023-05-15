@@ -5,6 +5,7 @@
 package views;
 
 import controller.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -130,13 +131,25 @@ public class Login extends javax.swing.JFrame {
         String usr = username.getText();
         String pass = String.valueOf(password.getPassword());
         
-        // TODO: show error to user
-        if (usr.isBlank() || pass.isBlank()) return;
+        if (usr.isBlank() || pass.isBlank()) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Preencha todos os campos para entrar no sistema", 
+                    "Erro!", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
         User user = User.login(usr, pass);
         
-        // TODO: show error to user
-        if (user == null) return;
+        if (user == null) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Nenhum usuário com essas credenciais foi encontrado", 
+                    "Erro!", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        };
         
         username.setText("");
         password.setText("");
