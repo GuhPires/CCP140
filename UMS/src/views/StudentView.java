@@ -6,6 +6,7 @@ package views;
 
 import controller.User;
 import controller.Student;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,13 +60,13 @@ public class StudentView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("CURRENT PASSWORD");
+        jLabel2.setText("Senha Atual");
 
-        jLabel3.setText("NEW PASSWORD");
+        jLabel3.setText("Nova Senha");
 
-        jLabel4.setText("CONFIRM PASSWORD");
+        jLabel4.setText("Confirmar nova Senha");
 
-        change_pass.setText("CHANGE PASSWORD");
+        change_pass.setText("TROCAR SENHA");
         change_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 change_passActionPerformed(evt);
@@ -108,7 +109,8 @@ public class StudentView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("current semester", jPanel2);
@@ -124,13 +126,13 @@ public class StudentView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("older semesters", jPanel3);
@@ -144,26 +146,21 @@ public class StudentView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pass_confirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(300, 300, 300)
-                                .addComponent(change_pass))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(current_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(300, 300, 300)
+                            .addComponent(change_pass))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGap(10, 10, 10)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(pass_confirmation)
+                                .addComponent(current_pass, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(new_pass, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,10 +184,10 @@ public class StudentView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(current_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -220,6 +217,10 @@ public class StudentView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void current_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_current_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_current_passActionPerformed
+
     private void new_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_new_passActionPerformed
@@ -228,23 +229,35 @@ public class StudentView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pass_confirmationActionPerformed
 
-    private void current_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_current_passActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_current_passActionPerformed
-
     private void change_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_passActionPerformed
         String currPass = String.valueOf(current_pass.getPassword());
         String newPass = String.valueOf(new_pass.getPassword());
         String passConfirmation = String.valueOf(pass_confirmation.getPassword());
-        
-        // TODO: show message to user
-        if (currPass.isBlank() || newPass.isBlank() || passConfirmation.isBlank()) return;
-        
-        // TODO: show message to user
-        if (!User.changePass(this.student.getRA(), currPass, newPass, passConfirmation)) return;
-        
-        //TODO: show message to user
-        
+
+        if (currPass.isBlank() || newPass.isBlank() || passConfirmation.isBlank()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Preencha todos os campos para trocar de senha",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        };
+
+        if (!User.changePass(this.student.getRA(), currPass, newPass, passConfirmation)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possível trocar a senha, verifique os dados digitados",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Senha alterada com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+
         current_pass.setText("");
         new_pass.setText("");
         pass_confirmation.setText("");
