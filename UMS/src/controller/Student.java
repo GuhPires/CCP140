@@ -5,7 +5,9 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import model.StudentModel;
+import model.SubjectModel;
 
 /**
  *
@@ -32,12 +34,10 @@ public class Student extends Person {
        return student;
    }
    
-    public void showGrades() {}
-    
-    public void showGradesHistory() {}
-    
-    public void changePassword() {
-        // username = RA -> call updatePass method with usedId or userName
+    public List<Subject> getStudentSubjects(boolean current) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllByStudent(this, current);
     }
 
     public String getRA() {
