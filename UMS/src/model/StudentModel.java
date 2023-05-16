@@ -48,10 +48,37 @@ public class StudentModel extends DBModel<Student> {
         }
     }
     
-    public List<Student> getAll(String university) {
+    public List<Student> getAllByUniversity(String university) {
         try {
             PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE university = ?");
             query.setString(1, university);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Student> students = new ArrayList();
+            
+            while(results.next()) {
+                String fname = results.getString("first_name");
+                String lname = results.getString("last_name");
+                String ra = results.getString("ra");
+                String uni = results.getString("university");
+                int semester = results.getInt("semester");
+                
+                students.add(new Student(fname, lname, ra, uni, semester));
+            }
+            
+            return students;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Student> getAllBySubject(String subject) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM subjects JOIN students ON subjects.student = students.ra WHERE name = ?");
+            query.setString(1, subject);
             
             ResultSet results = query.executeQuery();
             

@@ -50,6 +50,70 @@ public class SubjectModel extends DBModel<Subject> {
             return null;
         }
     }
+    
+    public List<Subject> getAllByUniversity(String university) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE university = ?");
+            query.setString(1, university);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Subject> subjects = new ArrayList();
+            
+            while(results.next()) {
+                int id = results.getInt("id");
+                String name = results.getString("name");
+                String uni = results.getString("university");
+                String student = results.getString("student");
+                int semester = results.getInt("semester");
+                float grade = results.getFloat("grade");
+                
+                subjects.add(new Subject(id, name, uni, student, semester, grade));
+            }
+            
+            return subjects;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Subject> getAllByStudent(Student student, boolean current) {
+        String clause = "SELECT * FROM " + this.table + " WHERE student = ?";
+        
+        if (current) clause += " AND semester = ?";
+        
+        System.out.println(clause);
+        
+        try {
+            PreparedStatement query = this.conn.prepareStatement(clause);
+            query.setString(1, student.getRA());
+            
+            if (current) query.setInt(2, student.getSemester());
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Subject> subjects = new ArrayList();
+            
+            while(results.next()) {
+                int id = results.getInt("id");
+                String name = results.getString("name");
+                String university = results.getString("university");
+                String stu = results.getString("student");
+                int semester = results.getInt("semester");
+                float grade = results.getFloat("grade");
+                
+                subjects.add(new Subject(id, name, university, stu, semester, grade));
+            }
+            
+            return subjects;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public Subject getOne(String field) {
@@ -127,6 +191,30 @@ public class SubjectModel extends DBModel<Subject> {
             System.err.println("Query error: " + e.getMessage());
             return false;
         }
+    }
+    
+    public boolean setGrades(Student student, List<Subject> subjects) {
+//        String statement = "";
+//        
+//        for (Subject s: subjects) {
+//            statement += "UPDATE " + this.table + " SET student = ?, semester = ? WHERE student = ?; ";
+//        }
+//        
+//        try {
+//            PreparedStatement query = this.conn.prepareStatement(statement);
+//            query.setString(1, student.getRA());
+//            query.setInt(2, student.getSemester());
+//            query.setInt(3, subject.getId());
+//            
+//            query.execute();
+//            
+//            return true;
+//        } catch (SQLException e) {
+//            System.err.println("Query error: " + e.getMessage());
+//            return false;
+//        }
+
+        return true;
     }
 
     @Override

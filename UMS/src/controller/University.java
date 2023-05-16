@@ -4,6 +4,7 @@
  */
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.StudentModel;
 import model.SubjectModel;
@@ -63,36 +64,38 @@ public class University {
         return subject != null;
     }
     
-    public List<Subject> showAllSubjects() {
-        SubjectModel model = new SubjectModel();
-        
-        return model.getAll(); 
-    }
-    
-    public void showSubjects(String studentRa) {}
-    
     public boolean addSubjectToStudent(Subject subject, Student student) {
         SubjectModel model = new SubjectModel();
         
         return model.setStudent(subject, student);
     }
     
-    public void showGrades(String studentRa) {}
-    
-    public void showGradesHistory(String studentRa) {}
-    
-    public List<Student> showStudents(String ...subject) {
+    public List<Student> getStudents(String ...subject) {
         StudentModel model = new StudentModel();
         
-        if (!subject[0].isBlank()) {} 
+        String sub = subject.length > 0 && !subject[0].isBlank() ? subject[0] : null;
         
-        return model.getAll(this.name);
+        if (sub != null) return model.getAllBySubject(sub);
         
+        return model.getAllByUniversity(this.name);
     }
     
-    // get one  
-    public void showStudent(String studentRa) {
-        // TODO: output curr and prev grades and subjects
+    public List<Subject> getStudentSubjects(Student student, boolean current) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllByStudent(student, current);
+    }
+    
+    public boolean setStudentGrades(Student student, List<Subject> subjects) {
+        SubjectModel model = new SubjectModel();
+        
+        return model.setGrades(student, subjects);
+    }
+    
+    public List<Subject> getAllSubjects() {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllByUniversity(this.name); 
     }
     
     public void closeSemester() {}

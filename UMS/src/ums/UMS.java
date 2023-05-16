@@ -22,15 +22,27 @@ public class UMS {
      */
     public static void main(String[] args) {
         StudentModel studentModel = new StudentModel();
-        SubjectModel subjectModel = new SubjectModel();
         
         University uni = new University("fei");
+        
+        List<Subject> uniSubjects = uni.getAllSubjects();
+        
+        for (Subject s : uniSubjects) {
+            System.out.println("Sub from uni:" + s.toString());
+        }
+        
         Student student = studentModel.getOne("11.123.882-2");
-        Subject subject = subjectModel.getOne(11);
+        List<Subject> currSubjects = uni.getStudentSubjects(student, true);
         
-        boolean added = uni.addSubjectToStudent(subject, student);
+        for (Subject s : currSubjects) {
+            System.out.println("Current Sub:" + s.toString());
+        }
         
-        System.out.println("ADDED? " + added);
+        List<Subject> subjects = uni.getStudentSubjects(student, false);
+        
+        for (Subject s : subjects) {
+            System.out.println("All Sub:" + s.toString());
+        }
     }
     
     public static void printStudents() {
@@ -46,7 +58,7 @@ public class UMS {
     public static void printUniversityStudents(String university) {
         StudentModel student = new StudentModel();
         
-        List<Student> students = student.getAll(university);
+        List<Student> students = student.getAllByUniversity(university);
         
         for (Student s : students) {
             System.out.println("Student from " + university + ":" + s.toString());

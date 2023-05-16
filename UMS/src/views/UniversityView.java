@@ -131,7 +131,6 @@ public class UniversityView extends javax.swing.JFrame {
         jLabel2.setText("CADASTRAR MATERIA");
 
         jLabel6.setText("nome:");
-
         submit_subject.setText("CADASTRAR");
         submit_subject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +186,6 @@ public class UniversityView extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-
         button_add_subject.setText("ADD DISCPLINA");
         button_add_subject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

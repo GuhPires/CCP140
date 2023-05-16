@@ -6,6 +6,10 @@ package views;
 
 import controller.User;
 import controller.Student;
+import controller.Subject;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -18,12 +22,9 @@ public class StudentView extends javax.swing.JFrame {
      * Creates new form Student
      */
     public StudentView(User user) {
-        initComponents();
-        
         this.student = Student.findStudent(user.getUsername());
         
-        // TODO: show message to user
-        if (this.student == null) return;
+        initComponents();
         
         name.setText("Olá " + this.student.getName());
     }
@@ -45,27 +46,26 @@ public class StudentView extends javax.swing.JFrame {
         pass_confirmation = new javax.swing.JPasswordField();
         new_pass = new javax.swing.JPasswordField();
         current_pass = new javax.swing.JPasswordField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        grades_pane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        grades_area_1 = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        grades_area_2 = new javax.swing.JTextArea();
         name = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setText("CURRENT PASSWORD");
+        jLabel2.setText("Senha Atual");
 
-        jLabel3.setText("NEW PASSWORD");
+        jLabel3.setText("Nova Senha");
 
-        jLabel4.setText("CONFIRM PASSWORD");
+        jLabel4.setText("Confirmar nova Senha");
 
-        change_pass.setText("CHANGE PASSWORD");
+        change_pass.setText("TROCAR SENHA");
         change_pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 change_passActionPerformed(evt);
@@ -90,10 +90,16 @@ public class StudentView extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        grades_pane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                grades_paneStateChanged(evt);
+            }
+        });
+
+        grades_area_1.setEditable(false);
+        grades_area_1.setColumns(20);
+        grades_area_1.setRows(5);
+        jScrollPane1.setViewportView(grades_area_1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,22 +107,23 @@ public class StudentView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jTabbedPane2.addTab("current semester", jPanel2);
+        grades_pane.addTab("Semestre Atual", jPanel2);
 
-        jTextArea2.setEditable(false);
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        grades_area_2.setEditable(false);
+        grades_area_2.setColumns(20);
+        grades_area_2.setRows(5);
+        jScrollPane2.setViewportView(grades_area_2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -124,16 +131,16 @@ public class StudentView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("older semesters", jPanel3);
+        grades_pane.addTab("Histórico", jPanel3);
 
         name.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         name.setText("Carregando....");
@@ -142,37 +149,29 @@ public class StudentView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(grades_pane))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(pass_confirmation, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(300, 300, 300)
-                                .addComponent(change_pass))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(12, 12, 12)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(current_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(300, 300, 300)
+                            .addComponent(change_pass))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4))
+                            .addGap(10, 10, 10)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(pass_confirmation)
+                                .addComponent(current_pass, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(new_pass, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1)
-                            .addComponent(jTabbedPane2))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(name)
+                        .addComponent(name)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,17 +179,15 @@ public class StudentView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(grades_pane, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(current_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(new_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -220,6 +217,10 @@ public class StudentView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void current_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_current_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_current_passActionPerformed
+
     private void new_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_passActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_new_passActionPerformed
@@ -228,32 +229,73 @@ public class StudentView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pass_confirmationActionPerformed
 
-    private void current_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_current_passActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_current_passActionPerformed
-
     private void change_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_change_passActionPerformed
         String currPass = String.valueOf(current_pass.getPassword());
         String newPass = String.valueOf(new_pass.getPassword());
         String passConfirmation = String.valueOf(pass_confirmation.getPassword());
-        
-        // TODO: show message to user
-        if (currPass.isBlank() || newPass.isBlank() || passConfirmation.isBlank()) return;
-        
-        // TODO: show message to user
-        if (!User.changePass(this.student.getRA(), currPass, newPass, passConfirmation)) return;
-        
-        //TODO: show message to user
-        
+
+        if (currPass.isBlank() || newPass.isBlank() || passConfirmation.isBlank()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Preencha todos os campos para trocar de senha",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        };
+
+        if (!User.changePass(this.student.getRA(), currPass, newPass, passConfirmation)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possível trocar a senha, verifique os dados digitados",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(
+            null,
+            "Senha alterada com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+
         current_pass.setText("");
         new_pass.setText("");
         pass_confirmation.setText("");
     }//GEN-LAST:event_change_passActionPerformed
 
+    private void grades_paneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_grades_paneStateChanged
+        int tab = grades_pane.getSelectedIndex();
+        
+        List<Subject> subjects = null;
+        JTextArea area = null;
+        
+        if (tab == 0) {
+            System.out.println("CURRENT");
+            // grab current semester
+            subjects = this.student.getStudentSubjects(true);
+            area = grades_area_1;
+        } else if(tab == 1){
+            System.out.println("HISTORY");
+            // grab history
+            subjects = this.student.getStudentSubjects(false);
+            System.out.println("SUB " + subjects);
+            area = grades_area_2;
+        }
+        
+        area.setText("");
+        
+        for(Subject s : subjects) {
+            area.append("MATÉRIA: " + s.getName() + " NOTA: " + s.getGrade() + "\n");
+        }
+    }//GEN-LAST:event_grades_paneStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton change_pass;
     private javax.swing.JPasswordField current_pass;
+    private javax.swing.JTextArea grades_area_1;
+    private javax.swing.JTextArea grades_area_2;
+    private javax.swing.JTabbedPane grades_pane;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -262,10 +304,6 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel name;
     private javax.swing.JPasswordField new_pass;
     private javax.swing.JPasswordField pass_confirmation;
