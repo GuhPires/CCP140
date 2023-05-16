@@ -45,8 +45,8 @@ public class UniversityView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        register_subject = new javax.swing.JButton();
+        subject_name = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -137,10 +137,10 @@ public class UniversityView extends javax.swing.JFrame {
 
         jLabel6.setText("nome:");
 
-        jButton2.setText("CADASTRAR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        register_subject.setText("CADASTRAR");
+        register_subject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                register_subjectActionPerformed(evt);
             }
         });
 
@@ -159,10 +159,10 @@ public class UniversityView extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3))))
+                                .addComponent(subject_name))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(74, 74, 74)
-                        .addComponent(jButton2)))
+                        .addComponent(register_subject)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -173,9 +173,9 @@ public class UniversityView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(subject_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(register_subject)
                 .addContainerGap())
         );
 
@@ -343,6 +343,7 @@ public class UniversityView extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
         JOptionPane.showMessageDialog(
             null,
             "Aluno cadastrado com sucesso!",
@@ -356,9 +357,35 @@ public class UniversityView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_register_studentActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void register_subjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_subjectActionPerformed
+        String subject = subject_name.getText();
+        
+        if (subject.isBlank()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Preencha o nome da matéria que deseja cadastrar",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!this.university.createSubject(subject)) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel cadastrar a matéria",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "Matéria cadastrada com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+        
+        subject_name.setText("");
+    }//GEN-LAST:event_register_subjectActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -374,7 +401,6 @@ public class UniversityView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -398,10 +424,11 @@ public class UniversityView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JButton register_student;
+    private javax.swing.JButton register_subject;
     private javax.swing.JTextField student_lastname;
     private javax.swing.JTextField student_name;
     private javax.swing.JPasswordField student_password;
+    private javax.swing.JTextField subject_name;
     // End of variables declaration//GEN-END:variables
 }
