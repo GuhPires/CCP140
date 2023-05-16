@@ -155,7 +155,7 @@ public class Login extends javax.swing.JFrame {
         password.setText("");
         
         if (user.getType().equals("student")) new StudentView(user).setVisible(true);
-        if (user.getType().equals("university")) new UniversityView().setVisible(true);
+        if (user.getType().equals("university")) new UniversityView(user).setVisible(true);
         
         this.setVisible(false);
     }//GEN-LAST:event_signup_buttonActionPerformed

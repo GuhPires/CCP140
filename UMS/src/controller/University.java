@@ -4,7 +4,6 @@
  */
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.StudentModel;
 import model.SubjectModel;
@@ -22,6 +21,10 @@ public class University {
         this.name = name;
     }
     
+    public static University findUniversity(String username) {
+       return new University(username);
+   }
+    
     public Student registerStudent(String fname, String lname, String password, int semester) {
         UserModel userModel = new UserModel();
         StudentModel studentModel = new StudentModel();
@@ -31,14 +34,11 @@ public class University {
         User user = userModel.insertOne(new User(RA, password, "student"));
         
         if (user == null) return null;
-        System.out.println("USER CREATED");
         
         Student student = studentModel.insertOne(new Student(fname, lname, RA, this.name, semester));
         
         // TODO: delete created user
         if (student == null) return null;
-        
-        System.out.println("STUDENT CREATED!");
         
         return student;
     }
