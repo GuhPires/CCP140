@@ -605,7 +605,7 @@ public class UniversityView extends javax.swing.JFrame {
     }//GEN-LAST:event_show_student_subjectsActionPerformed
 
     private void add_gradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_gradesActionPerformed
-        Subject subject = (Subject) subject_dropdown.getSelectedItem();
+        Subject subject = (Subject) student_subject_dropdown.getSelectedItem();
         Student student = (Student) student_dropdown.getSelectedItem();
         
         String grade = JOptionPane.showInputDialog(
@@ -614,6 +614,7 @@ public class UniversityView extends javax.swing.JFrame {
                 "Inserir Nota",
                 JOptionPane.QUESTION_MESSAGE);
         
+        if (grade == null) return;
         
         subject.setGrade(Float.parseFloat(grade));
         
@@ -650,6 +651,7 @@ public class UniversityView extends javax.swing.JFrame {
             delete_student.setEnabled(false);
             show_student_history.setEnabled(false);
             show_student_subjects.setEnabled(false);
+            add_grades.setEnabled(false);
             
             add_subject_student.setEnabled(false);
             

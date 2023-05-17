@@ -84,8 +84,6 @@ public class SubjectModel extends DBModel<Subject> {
         
         if (current) clause += " AND semester = ?";
         
-        System.out.println(clause);
-        
         try {
             PreparedStatement query = this.conn.prepareStatement(clause);
             query.setString(1, student.getRA());
