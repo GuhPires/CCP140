@@ -472,6 +472,14 @@ public class UniversityView extends javax.swing.JFrame {
     private void delete_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_studentActionPerformed
         Student student = (Student) student_dropdown.getSelectedItem();
         
+        int option = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja excluir o aluno " + student.getName() + " da base de dados?",
+                "Tem certeza?",
+                JOptionPane.YES_NO_OPTION);
+        
+        if (option == 1) return;
+        
         boolean deleted = this.university.unregisterStudent(student.getRA());
                
         if(!deleted) {
