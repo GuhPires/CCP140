@@ -211,6 +211,12 @@ public class UniversityView extends javax.swing.JFrame {
             }
         });
 
+        subject_dropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subject_dropdownActionPerformed(evt);
+            }
+        });
+
         add_subject_student.setText("ADD DISCIPLINA");
         add_subject_student.setEnabled(false);
         add_subject_student.addActionListener(new java.awt.event.ActionListener() {
@@ -645,6 +651,8 @@ public class UniversityView extends javax.swing.JFrame {
             show_student_history.setEnabled(false);
             show_student_subjects.setEnabled(false);
             
+            add_subject_student.setEnabled(false);
+            
             return;
         }
         
@@ -656,6 +664,8 @@ public class UniversityView extends javax.swing.JFrame {
         student_subject_dropdown.setSelectedIndex(-1);
         student_subject_dropdown.setEnabled(true);
         
+        if (subject_dropdown.getSelectedIndex() != -1) add_subject_student.setEnabled(true);
+        
         delete_student.setEnabled(true);
         show_student_history.setEnabled(true);
         show_student_subjects.setEnabled(true);
@@ -664,11 +674,27 @@ public class UniversityView extends javax.swing.JFrame {
     private void student_subject_dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_subject_dropdownActionPerformed
         if (student_subject_dropdown.getSelectedIndex() == -1) {
             add_grades.setEnabled(false);
+            
             return;
         }
         
         add_grades.setEnabled(true);
     }//GEN-LAST:event_student_subject_dropdownActionPerformed
+
+    private void subject_dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subject_dropdownActionPerformed
+        if (subject_dropdown.getSelectedIndex() == -1) {
+            
+            show_students_subject.setEnabled(false);
+            
+            add_subject_student.setEnabled(false);
+            
+            return;
+        }
+        
+        if (student_dropdown.getSelectedIndex() != -1) add_subject_student.setEnabled(true);
+        
+        show_students_subject.setEnabled(true);    
+    }//GEN-LAST:event_subject_dropdownActionPerformed
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
