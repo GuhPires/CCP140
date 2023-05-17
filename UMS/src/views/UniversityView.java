@@ -212,6 +212,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         add_subject_student.setText("ADD DISCIPLINA");
+        add_subject_student.setEnabled(false);
         add_subject_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_subject_studentActionPerformed(evt);
@@ -219,6 +220,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         delete_student.setText("EXCLUIR ALUNO");
+        delete_student.setEnabled(false);
         delete_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete_studentActionPerformed(evt);
@@ -226,6 +228,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         show_student_history.setText("MOSTRAR HISTORICO");
+        show_student_history.setEnabled(false);
         show_student_history.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 show_student_historyActionPerformed(evt);
@@ -233,6 +236,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         show_students_subject.setText("MOSTRAR ALUNOS NA DISCIPLINA");
+        show_students_subject.setEnabled(false);
         show_students_subject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 show_students_subjectActionPerformed(evt);
@@ -240,6 +244,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         add_grades.setText("ADD NOTAS");
+        add_grades.setEnabled(false);
         add_grades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_gradesActionPerformed(evt);
@@ -247,6 +252,7 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         show_student_subjects.setText("MOSTRAR DISCIPLINAS ALUNO");
+        show_student_subjects.setEnabled(false);
         show_student_subjects.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 show_student_subjectsActionPerformed(evt);
@@ -264,6 +270,11 @@ public class UniversityView extends javax.swing.JFrame {
         jLabel10.setText("Matérias do Aluno");
 
         student_subject_dropdown.setEnabled(false);
+        student_subject_dropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                student_subject_dropdownActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -629,6 +640,11 @@ public class UniversityView extends javax.swing.JFrame {
         if (student_dropdown.getSelectedIndex() == -1) {
             student_subject_dropdown.setModel(new DefaultComboBoxModel());
             student_subject_dropdown.setEnabled(false);
+            
+            delete_student.setEnabled(false);
+            show_student_history.setEnabled(false);
+            show_student_subjects.setEnabled(false);
+            
             return;
         }
         
@@ -639,7 +655,20 @@ public class UniversityView extends javax.swing.JFrame {
         student_subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
         student_subject_dropdown.setSelectedIndex(-1);
         student_subject_dropdown.setEnabled(true);
+        
+        delete_student.setEnabled(true);
+        show_student_history.setEnabled(true);
+        show_student_subjects.setEnabled(true);
     }//GEN-LAST:event_student_dropdownActionPerformed
+
+    private void student_subject_dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_subject_dropdownActionPerformed
+        if (student_subject_dropdown.getSelectedIndex() == -1) {
+            add_grades.setEnabled(false);
+            return;
+        }
+        
+        add_grades.setEnabled(true);
+    }//GEN-LAST:event_student_subject_dropdownActionPerformed
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
