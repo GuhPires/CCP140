@@ -8,6 +8,7 @@ import controller.Student;
 import controller.Subject;
 import controller.University;
 import controller.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -229,7 +230,11 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         add_grades.setText("ADD NOTAS");
-        add_grades.setEnabled(false);
+        add_grades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                add_gradesActionPerformed(evt);
+            }
+        });
 
         show_student_subjects.setText("MOSTRAR DISCIPLINAS ALUNO");
         show_student_subjects.addActionListener(new java.awt.event.ActionListener() {
@@ -541,6 +546,26 @@ public class UniversityView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_show_student_subjectsActionPerformed
 
+    private void add_gradesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_gradesActionPerformed
+        Subject subject = (Subject) subject_dropdown.getSelectedItem();
+        Student student = (Student) student_dropdown.getSelectedItem();
+        
+        String grade = JOptionPane.showInputDialog(
+                null,
+                "Digite a nota de " + subject.getName() + " do aluno " + student.getName() + ":",
+                "Inserir Nota",
+                JOptionPane.QUESTION_MESSAGE);
+        
+        List<Subject> subjects = new ArrayList();
+        
+        subject.setGrade(Float.parseFloat(grade));
+        
+        subjects.add(subject);
+        
+        this.university.setStudentGrades(student, subjects);
+
+    }//GEN-LAST:event_add_gradesActionPerformed
+
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
         // TODO: create method to get all UNIQUE subjects with NO STUDENTS
@@ -548,6 +573,9 @@ public class UniversityView extends javax.swing.JFrame {
         
         student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
         subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
+        
+        student_dropdown.setSelectedIndex(-1);
+        subject_dropdown.setSelectedIndex(-1);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

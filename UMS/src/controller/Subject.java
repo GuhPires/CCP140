@@ -55,6 +55,10 @@ public class Subject {
         return grade;
     }
 
+    public void setGrade(float grade) {
+        this.grade = grade;
+    }
+
     @Override
     public String toString() {
         return name;
