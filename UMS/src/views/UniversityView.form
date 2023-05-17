@@ -405,6 +405,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="FINALIZAR SEMESTRE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="finish_semesterActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

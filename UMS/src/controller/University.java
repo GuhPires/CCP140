@@ -86,10 +86,10 @@ public class University {
         return model.getAllByStudent(student, current);
     }
     
-    public boolean setStudentGrades(Student student, List<Subject> subjects) {
+    public boolean setStudentGrades(Subject subject) {
         SubjectModel model = new SubjectModel();
         
-        return model.setGrades(student, subjects);
+        return model.setGrades(subject);
     }
     
     public List<Subject> getAllSubjects() {

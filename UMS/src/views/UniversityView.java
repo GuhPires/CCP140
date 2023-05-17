@@ -244,6 +244,11 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         finish_semester.setText("FINALIZAR SEMESTRE");
+        finish_semester.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finish_semesterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -390,6 +395,8 @@ public class UniversityView extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE);
 
         subject_name.setText("");
+        
+        this.updateDropdown();
     }//GEN-LAST:event_register_subjectActionPerformed
 
     private void add_subject_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_subject_studentActionPerformed
@@ -468,6 +475,7 @@ public class UniversityView extends javax.swing.JFrame {
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
         JOptionPane.showMessageDialog(
             null,
             "Aluno cadastrado com sucesso!",
@@ -477,6 +485,8 @@ public class UniversityView extends javax.swing.JFrame {
         student_name.setText("");
         student_lastname.setText("");
         student_password.setText("");
+        
+        this.updateDropdown();
     }//GEN-LAST:event_register_studentActionPerformed
 
     private void student_lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_lastnameActionPerformed
@@ -556,15 +566,32 @@ public class UniversityView extends javax.swing.JFrame {
                 "Inserir Nota",
                 JOptionPane.QUESTION_MESSAGE);
         
-        List<Subject> subjects = new ArrayList();
         
         subject.setGrade(Float.parseFloat(grade));
         
-        subjects.add(subject);
+        boolean added = this.university.setStudentGrades(subject);
         
-        this.university.setStudentGrades(student, subjects);
-
+        if (!added) {  
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel adicionar a nota ao aluno",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "Nota cadastrada com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+        
+        this.updateDropdown();
     }//GEN-LAST:event_add_gradesActionPerformed
+
+    private void finish_semesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finish_semesterActionPerformed
+        this.updateDropdown();
+    }//GEN-LAST:event_finish_semesterActionPerformed
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
