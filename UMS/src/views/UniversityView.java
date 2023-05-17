@@ -27,6 +27,7 @@ public class UniversityView extends javax.swing.JFrame {
         initComponents();
         
         List<Student> students = this.university.getStudents();
+        // TODO: create method to get all UNIQUE subjects with NO STUDENTS
         List<Subject> subjects = this.university.getAllSubjects();
         
         student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
@@ -200,8 +201,11 @@ public class UniversityView extends javax.swing.JFrame {
 
         jLabel8.setText("Matéria");
 
+        student_dropdown.setEditable(true);
+
+        subject_dropdown.setEditable(true);
+
         add_subject_student.setText("ADD DISCIPLINA");
-        add_subject_student.setEnabled(false);
         add_subject_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_subject_studentActionPerformed(evt);
@@ -284,7 +288,7 @@ public class UniversityView extends javax.swing.JFrame {
                     .addComponent(show_student_subjects))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(finish_semester)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -378,7 +382,29 @@ public class UniversityView extends javax.swing.JFrame {
     }//GEN-LAST:event_register_subjectActionPerformed
 
     private void add_subject_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_subject_studentActionPerformed
+        Subject subject = (Subject) subject_dropdown.getSelectedItem();
+        Student student = (Student) student_dropdown.getSelectedItem();
         
+        System.out.println("SUBJECT: " + subject);
+        System.out.println("STUDENT: " + student);
+        
+        boolean added = this.university.addSubjectToStudent(subject, student);
+        
+        if(!added) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel adicionar a matéria para o aluno",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "Matéria adicionada ao aluno com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_add_subject_studentActionPerformed
 
     private void delete_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_studentActionPerformed

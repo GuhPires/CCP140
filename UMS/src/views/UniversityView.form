@@ -315,7 +315,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="finish_semester" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -333,6 +333,7 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="student_dropdown">
           <Properties>
+            <Property name="editable" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
@@ -343,6 +344,7 @@
         </Component>
         <Component class="javax.swing.JComboBox" name="subject_dropdown">
           <Properties>
+            <Property name="editable" type="boolean" value="true"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
@@ -354,7 +356,6 @@
         <Component class="javax.swing.JButton" name="add_subject_student">
           <Properties>
             <Property name="text" type="java.lang.String" value="ADD DISCIPLINA"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="add_subject_studentActionPerformed"/>
