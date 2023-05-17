@@ -372,8 +372,10 @@
         <Component class="javax.swing.JButton" name="show_student_history">
           <Properties>
             <Property name="text" type="java.lang.String" value="MOSTRAR HISTORICO"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_student_historyActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="show_students_subject">
           <Properties>
