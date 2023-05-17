@@ -205,6 +205,12 @@ public class UniversityView extends javax.swing.JFrame {
         jLabel8.setLabelFor(subject_dropdown);
         jLabel8.setText("Matéria");
 
+        student_dropdown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                student_dropdownActionPerformed(evt);
+            }
+        });
+
         add_subject_student.setText("ADD DISCIPLINA");
         add_subject_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -618,9 +624,26 @@ public class UniversityView extends javax.swing.JFrame {
         this.updateDropdown();
     }//GEN-LAST:event_finish_semesterActionPerformed
 
+    private void student_dropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_dropdownActionPerformed
+
+        if (student_dropdown.getSelectedIndex() == -1) {
+            student_subject_dropdown.setModel(new DefaultComboBoxModel());
+            student_subject_dropdown.setEnabled(false);
+            return;
+        }
+        
+        Student student = (Student) student_dropdown.getSelectedItem();
+        
+        List<Subject> subjects = this.university.getStudentSubjects(student, true);
+        
+        student_subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
+        student_subject_dropdown.setSelectedIndex(-1);
+        student_subject_dropdown.setEnabled(true);
+    }//GEN-LAST:event_student_dropdownActionPerformed
+
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
-        // TODO: create method to get all UNIQUE subjects with NO STUDENTS
+        // TODO: create method to get all UNIQUE subjects from university
         List<Subject> subjects = this.university.getAllSubjects();
         
         student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
