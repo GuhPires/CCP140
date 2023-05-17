@@ -26,12 +26,7 @@ public class UniversityView extends javax.swing.JFrame {
         
         initComponents();
         
-        List<Student> students = this.university.getStudents();
-        // TODO: create method to get all UNIQUE subjects with NO STUDENTS
-        List<Subject> subjects = this.university.getAllSubjects();
-        
-        student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
-        subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
+        this.updateDropdown();
     }
 
     /**
@@ -213,7 +208,6 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         delete_student.setText("EXCLUIR ALUNO");
-        delete_student.setEnabled(false);
         delete_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 delete_studentActionPerformed(evt);
@@ -405,10 +399,32 @@ public class UniversityView extends javax.swing.JFrame {
             "Matéria adicionada ao aluno com sucesso!",
             "Sucesso!",
             JOptionPane.INFORMATION_MESSAGE);
+        
+        this.updateDropdown();
     }//GEN-LAST:event_add_subject_studentActionPerformed
 
     private void delete_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_studentActionPerformed
-        // TODO add your handling code here:
+        Student student = (Student) student_dropdown.getSelectedItem();
+        
+        boolean deleted = this.university.unregisterStudent(student.getRA());
+               
+        if(!deleted) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel deletar o aluno",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "Aluno removido com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+        
+        this.updateDropdown();
     }//GEN-LAST:event_delete_studentActionPerformed
 
     private void register_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_studentActionPerformed
@@ -450,7 +466,15 @@ public class UniversityView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_student_lastnameActionPerformed
 
-
+    private void updateDropdown() {
+        List<Student> students = this.university.getStudents();
+        // TODO: create method to get all UNIQUE subjects with NO STUDENTS
+        List<Subject> subjects = this.university.getAllSubjects();
+        
+        student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
+        subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_grades;
     private javax.swing.JButton add_subject_student;
