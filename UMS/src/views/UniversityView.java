@@ -218,7 +218,11 @@ public class UniversityView extends javax.swing.JFrame {
         show_student_history.setEnabled(false);
 
         show_students_subject.setText("MOSTRAR ALUNOS NA DISCIPLINA");
-        show_students_subject.setEnabled(false);
+        show_students_subject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                show_students_subjectActionPerformed(evt);
+            }
+        });
 
         add_grades.setText("ADD NOTAS");
         add_grades.setEnabled(false);
@@ -465,6 +469,25 @@ public class UniversityView extends javax.swing.JFrame {
     private void student_lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_lastnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_student_lastnameActionPerformed
+
+    private void show_students_subjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_students_subjectActionPerformed
+        Subject subject = (Subject) subject_dropdown.getSelectedItem();
+        
+        List<Student> students = this.university.getStudents(subject.getName());
+        
+        if (students == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Nenhum aluno encontrado para a disciplina selecionada",
+                "Atenção!",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        for (Student s : students) {
+            results.append(s + "\n");
+        }
+    }//GEN-LAST:event_show_students_subjectActionPerformed
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
