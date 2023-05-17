@@ -394,8 +394,10 @@
         <Component class="javax.swing.JButton" name="show_student_subjects">
           <Properties>
             <Property name="text" type="java.lang.String" value="MOSTRAR DISCIPLINAS ALUNO"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_student_subjectsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="finish_semester">
           <Properties>

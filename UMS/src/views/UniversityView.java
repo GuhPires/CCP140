@@ -232,7 +232,11 @@ public class UniversityView extends javax.swing.JFrame {
         add_grades.setEnabled(false);
 
         show_student_subjects.setText("MOSTRAR DISCIPLINAS ALUNO");
-        show_student_subjects.setEnabled(false);
+        show_student_subjects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                show_student_subjectsActionPerformed(evt);
+            }
+        });
 
         finish_semester.setText("FINALIZAR SEMESTRE");
 
@@ -503,7 +507,7 @@ public class UniversityView extends javax.swing.JFrame {
         if (subjects == null || subjects.isEmpty()) {
             JOptionPane.showMessageDialog(
                 null,
-                "Nenhuma matéria encontrado para o aluno selecionado",
+                "Nenhuma matéria encontrada para o aluno selecionado",
                 "Atenção!",
                 JOptionPane.WARNING_MESSAGE);
             return;
@@ -515,6 +519,27 @@ public class UniversityView extends javax.swing.JFrame {
             results.append(s + " - Semestre: " + s.getSemester() + " - Nota: " + s.getGrade() + "\n");
         }
     }//GEN-LAST:event_show_student_historyActionPerformed
+
+    private void show_student_subjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_student_subjectsActionPerformed
+        Student student = (Student) student_dropdown.getSelectedItem();
+        
+        List<Subject> subjects = this.university.getStudentSubjects(student, true);
+        
+        if (subjects == null || subjects.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Nenhuma matéria que está sendo cursada no semestre atual foi encontrada para o aluno selecionado",
+                "Atenção!",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        results.setText("");
+        
+        for (Subject s : subjects) {
+            results.append(s + " - Nota: " + s.getGrade() + "\n");
+        }
+    }//GEN-LAST:event_show_student_subjectsActionPerformed
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
