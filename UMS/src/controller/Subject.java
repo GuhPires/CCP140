@@ -54,4 +54,9 @@ public class Subject {
     public float getGrade() {
         return grade;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

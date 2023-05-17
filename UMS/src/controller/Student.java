@@ -51,4 +51,9 @@ public class Student extends Person {
     public int getSemester() {
         return semester;
     }
+
+    @Override
+    public String toString() {
+        return this.getName() + " - " + RA;
+    }
 }

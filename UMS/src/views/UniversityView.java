@@ -5,8 +5,11 @@
 package views;
 
 import controller.Student;
+import controller.Subject;
 import controller.University;
 import controller.User;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,12 @@ public class UniversityView extends javax.swing.JFrame {
         this.university = University.findUniversity(user.getUsername());
         
         initComponents();
+        
+        List<Student> students = this.university.getStudents();
+        List<Subject> subjects = this.university.getAllSubjects();
+        
+        student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
+        subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));
     }
 
     /**
@@ -76,6 +85,12 @@ public class UniversityView extends javax.swing.JFrame {
 
         jLabel4.setText("Senha");
 
+        student_lastname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                student_lastnameActionPerformed(evt);
+            }
+        });
+
         register_student.setText("CADASTRAR");
         register_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,24 +104,25 @@ public class UniversityView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(41, 41, 41)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(student_name, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(student_name, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(student_lastname)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(register_student)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(student_password))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(register_student)
+                            .addComponent(student_password, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+                            .addComponent(student_lastname))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,11 +200,8 @@ public class UniversityView extends javax.swing.JFrame {
 
         jLabel8.setText("Matéria");
 
-        student_dropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        subject_dropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         add_subject_student.setText("ADD DISCIPLINA");
+        add_subject_student.setEnabled(false);
         add_subject_student.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 add_subject_studentActionPerformed(evt);
@@ -196,14 +209,24 @@ public class UniversityView extends javax.swing.JFrame {
         });
 
         delete_student.setText("EXCLUIR ALUNO");
+        delete_student.setEnabled(false);
+        delete_student.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_studentActionPerformed(evt);
+            }
+        });
 
         show_student_history.setText("MOSTRAR HISTORICO");
+        show_student_history.setEnabled(false);
 
         show_students_subject.setText("MOSTRAR ALUNOS NA DISCIPLINA");
+        show_students_subject.setEnabled(false);
 
         add_grades.setText("ADD NOTAS");
+        add_grades.setEnabled(false);
 
         show_student_subjects.setText("MOSTRAR DISCIPLINAS ALUNO");
+        show_student_subjects.setEnabled(false);
 
         finish_semester.setText("FINALIZAR SEMESTRE");
 
@@ -261,7 +284,7 @@ public class UniversityView extends javax.swing.JFrame {
                     .addComponent(show_student_subjects))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(finish_semester)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -280,9 +303,11 @@ public class UniversityView extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(0, 61, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,42 +347,6 @@ public class UniversityView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void register_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_studentActionPerformed
-        String name = student_name.getText();
-        String lastName = student_lastname.getText();
-        String password = String.valueOf(student_password.getPassword());
-
-        if (name.isBlank() || lastName.isBlank() || password.isBlank()) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Preencha todos os campos para cadastrar um aluno",
-                "Erro!",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Student student = this.university.registerStudent(name, lastName, password, 1);
-
-        if (student == null) {
-            JOptionPane.showMessageDialog(
-                null,
-                "Não foi possivel registrar o aluno",
-                "Erro!",
-                JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        JOptionPane.showMessageDialog(
-            null,
-            "Aluno cadastrado com sucesso!",
-            "Sucesso!",
-            JOptionPane.INFORMATION_MESSAGE);
-
-
-        student_name.setText("");
-        student_lastname.setText("");
-        student_password.setText("");   
-    }//GEN-LAST:event_register_studentActionPerformed
-
     private void register_subjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_subjectActionPerformed
         String subject = subject_name.getText();
 
@@ -389,8 +378,51 @@ public class UniversityView extends javax.swing.JFrame {
     }//GEN-LAST:event_register_subjectActionPerformed
 
     private void add_subject_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_subject_studentActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_add_subject_studentActionPerformed
+
+    private void delete_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_studentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delete_studentActionPerformed
+
+    private void register_studentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_register_studentActionPerformed
+        String name = student_name.getText();
+        String lastName = student_lastname.getText();
+        String password = String.valueOf(student_password.getPassword());
+
+        if (name.isBlank() || lastName.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Preencha todos os campos para cadastrar um aluno",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Student student = this.university.registerStudent(name, lastName, password, 1);
+
+        if (student == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel registrar o aluno",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(
+            null,
+            "Aluno cadastrado com sucesso!",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+
+        student_name.setText("");
+        student_lastname.setText("");
+        student_password.setText("");
+    }//GEN-LAST:event_register_studentActionPerformed
+
+    private void student_lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_student_lastnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_student_lastnameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
