@@ -104,7 +104,11 @@ public class University {
         return model.getAllByUniversity(this.name); 
     }
     
-    public void closeSemester() {}
+    public boolean finishSemester() {
+        StudentModel model = new StudentModel();
+        
+        return model.finishSemester(this.name);
+    }
 
     public String getName() {
         return name;

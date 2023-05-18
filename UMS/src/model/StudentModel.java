@@ -179,4 +179,18 @@ public class StudentModel extends DBModel<Student> {
     public List<Student> deleteMany() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public boolean finishSemester(String university) {     
+        try {
+            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET semester = COALESCE(semester, 0) + 1 WHERE university = ?");
+            query.setString(1, university);
+            
+            query.execute();
+            
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return false;
+        }
+    }
 }

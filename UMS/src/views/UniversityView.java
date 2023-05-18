@@ -644,6 +644,24 @@ public class UniversityView extends javax.swing.JFrame {
     }//GEN-LAST:event_add_gradesActionPerformed
 
     private void finish_semesterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finish_semesterActionPerformed
+        boolean finished = this.university.finishSemester();
+        
+        if (!finished) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Não foi possivel finalizar o semestre",
+                "Erro!",
+                JOptionPane.ERROR_MESSAGE);
+            
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(
+            null,
+            "Semestre finalizado com sucesso! Todos os alunos da universidade foram atualizados",
+            "Sucesso!",
+            JOptionPane.INFORMATION_MESSAGE);
+        
         this.updateDropdown();
     }//GEN-LAST:event_finish_semesterActionPerformed
 
