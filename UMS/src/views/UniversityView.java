@@ -445,9 +445,6 @@ public class UniversityView extends javax.swing.JFrame {
         Subject subject = (Subject) subject_dropdown.getSelectedItem();
         Student student = (Student) student_dropdown.getSelectedItem();
         
-        System.out.println("SUBJECT: " + subject);
-        System.out.println("STUDENT: " + student);
-        
         boolean added = this.university.addSubjectToStudent(subject, student);
         
         if(!added) {
@@ -550,6 +547,8 @@ public class UniversityView extends javax.swing.JFrame {
         
         List<Student> students = this.university.getStudents(subject.getName());
         
+        results.setText("");
+        
         if (students == null || students.isEmpty()) {
             JOptionPane.showMessageDialog(
                 null,
@@ -558,8 +557,6 @@ public class UniversityView extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        results.setText("");
         
         for (Student s : students) {
             results.append(s + "\n");
@@ -573,6 +570,8 @@ public class UniversityView extends javax.swing.JFrame {
         
         List<Subject> subjects = this.university.getStudentSubjects(student, false);
         
+        results.setText("");
+        
         if (subjects == null || subjects.isEmpty()) {
             JOptionPane.showMessageDialog(
                 null,
@@ -581,9 +580,7 @@ public class UniversityView extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        results.setText("");
-        
+                
         for (Subject s : subjects) {
             results.append(s + " - Semestre: " + s.getSemester() + " - Nota: " + s.getGrade() + "\n");
         }
@@ -596,6 +593,8 @@ public class UniversityView extends javax.swing.JFrame {
         
         List<Subject> subjects = this.university.getStudentSubjects(student, true);
         
+        results.setText("");
+        
         if (subjects == null || subjects.isEmpty()) {
             JOptionPane.showMessageDialog(
                 null,
@@ -604,9 +603,7 @@ public class UniversityView extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        results.setText("");
-        
+
         for (Subject s : subjects) {
             results.append(s + " - Nota: " + s.getGrade() + "\n");
         }
@@ -708,8 +705,7 @@ public class UniversityView extends javax.swing.JFrame {
 
     private void updateDropdown() {
         List<Student> students = this.university.getStudents();
-        // TODO: create method to get all UNIQUE subjects from university
-        List<Subject> subjects = this.university.getAllSubjects();
+        List<Subject> subjects = this.university.getAllDistinctSubjects();
         
         student_dropdown.setModel(new DefaultComboBoxModel(students.toArray()));
         subject_dropdown.setModel(new DefaultComboBoxModel(subjects.toArray()));

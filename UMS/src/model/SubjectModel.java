@@ -112,7 +112,31 @@ public class SubjectModel extends DBModel<Subject> {
             return null;
         }
     }
-
+    
+    public List<Subject> getAllDistinct(String university) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("SELECT DISTINCT ON (name) " + this.table + ".* FROM " + this.table + " WHERE university = ?");
+            query.setString(1, university);
+            
+            ResultSet results = query.executeQuery();
+            
+            List<Subject> subjects = new ArrayList();
+            
+            while(results.next()) {
+                String name = results.getString("name");
+                String uni = results.getString("university");
+                
+                subjects.add(new Subject(name, uni));
+            }
+            
+            return subjects;
+            
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
+    
     @Override
     public Subject getOne(String field) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -177,7 +201,7 @@ public class SubjectModel extends DBModel<Subject> {
     
     public boolean setStudent(Subject subject, Student student) {
         try {
-            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET student = ?, semester = ? WHERE id = ?");
+            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET student = ?, semester = ?, grade = 0 WHERE id = ?");
             query.setString(1, student.getRA());
             query.setInt(2, student.getSemester());
             query.setInt(3, subject.getId());

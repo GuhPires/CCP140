@@ -59,7 +59,7 @@ public class University {
     public boolean createSubject(String name) {
         SubjectModel model = new SubjectModel();
         
-        Subject subject = model.insertOne(new Subject(this.name, name));
+        Subject subject = model.insertOne(new Subject(name, this.name));
         
         return subject != null;
     }
@@ -90,6 +90,12 @@ public class University {
         SubjectModel model = new SubjectModel();
         
         return model.setGrades(subject);
+    }
+    
+    public List<Subject> getAllDistinctSubjects() {
+        SubjectModel model = new SubjectModel();
+        
+        return model.getAllDistinct(this.name); 
     }
     
     public List<Subject> getAllSubjects() {

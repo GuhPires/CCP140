@@ -16,9 +16,9 @@ public class Subject {
     private int semester;
     private float grade;
     
-    public Subject(String university, String name) {
-        this.university = university;
+    public Subject(String name, String university) {
         this.name = name;
+        this.university = university;
     }
     
     public Subject(int id, String name, String university, String student, int semester, float grade) {
