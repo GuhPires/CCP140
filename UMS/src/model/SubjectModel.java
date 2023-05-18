@@ -188,6 +188,31 @@ public class SubjectModel extends DBModel<Subject> {
             return null;
         }
     }
+    
+    public Subject insertOneWithStudent(Subject subject, Student student) {
+        try {
+            PreparedStatement query = this.conn.prepareStatement("INSERT INTO " + this.table + " (name, university, student, semester, grade) VALUES (?, ?, ?, ?, 0)", Statement.RETURN_GENERATED_KEYS);
+            query.setString(1, subject.getName());
+            query.setString(2, subject.getUniversity());
+            query.setString(3, student.getRA());
+            query.setInt(4, student.getSemester());
+            
+            int result = query.executeUpdate();
+            
+            if (result == 0) return null;
+            
+            ResultSet created = query.getGeneratedKeys();
+            
+            if (!created.next()) return null;
+            
+            int id = created.getInt(1);
+            
+            return this.getOne(id);
+        } catch (SQLException e) {
+            System.err.println("Query error: " + e.getMessage());
+            return null;
+        }
+    }
 
     @Override
     public List<Subject> insertMany(List<Subject> objs) {
@@ -201,12 +226,22 @@ public class SubjectModel extends DBModel<Subject> {
     
     public boolean setStudent(Subject subject, Student student) {
         try {
-            PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET student = ?, semester = ?, grade = 0 WHERE id = ?");
-            query.setString(1, student.getRA());
-            query.setInt(2, student.getSemester());
-            query.setInt(3, subject.getId());
+            PreparedStatement check = this.conn.prepareStatement("SELECT * FROM " + this.table + " WHERE name = ? AND student IS NULL LIMIT 1");
+            check.setString(1, subject.getName());
             
-            query.execute();
+            ResultSet found = check.executeQuery();
+
+              if (found.next()) {
+                  PreparedStatement query = this.conn.prepareStatement("UPDATE " + this.table + " SET student = ?, semester = ?, grade = 0 WHERE id = ?");
+                  query.setString(1, student.getRA());
+                  query.setInt(2, student.getSemester());
+                  query.setInt(3, found.getInt("id"));
+                  query.execute();
+              } else {
+                  Subject created = this.insertOneWithStudent(subject, student);
+                  
+                  if (created == null) return false;
+              }  
             
             return true;
         } catch (SQLException e) {
