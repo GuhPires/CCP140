@@ -269,23 +269,29 @@ public class StudentView extends javax.swing.JFrame {
         List<Subject> subjects = null;
         JTextArea area = null;
         
-        if (tab == 0) {
-            System.out.println("CURRENT");
-            // grab current semester
-            subjects = this.student.getStudentSubjects(true);
-            area = grades_area_1;
-        } else if(tab == 1){
-            System.out.println("HISTORY");
-            // grab history
-            subjects = this.student.getStudentSubjects(false);
-            System.out.println("SUB " + subjects);
-            area = grades_area_2;
+        switch (tab) {
+            case 0 -> {
+                // grab current semester
+                subjects = this.student.getStudentSubjects(true);
+                area = grades_area_1;
+            }
+            case 1 -> {
+                // grab history
+                subjects = this.student.getStudentSubjects(false);
+                area = grades_area_2;
+            }
+            default -> {
+                    return;
+            }
         }
         
         area.setText("");
         
         for(Subject s : subjects) {
-            area.append("MATÉRIA: " + s.getName() + " NOTA: " + s.getGrade() + "\n");
+            String txt = "MATÉRIA: " + s.getName() + " -- NOTA: " + s.getGrade();
+            if (tab == 1) txt = txt.concat(" -- SEMESTRE: " + s.getSemester());
+            
+            area.append(txt + "\n");
         }
     }//GEN-LAST:event_grades_paneStateChanged
 
